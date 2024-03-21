@@ -1,5 +1,6 @@
 import { Container } from '@mui/material';
 import { Videoplayer } from './videoplayer';
+import { EnglishTest } from './englishTest';
 
 const url = 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4';
 
@@ -8,7 +9,7 @@ export const English: React.FC = () => {
     <div>
       <Container maxWidth="xl" sx={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
         <Videoplayer
-          test={'hellojon'}
+          test={<EnglishTest />}
           language="english"
           title="lesson1"
           url="https://www.youtube.com/watch?v=MqGzrhHnn5E"

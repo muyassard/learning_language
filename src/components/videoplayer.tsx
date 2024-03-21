@@ -39,7 +39,7 @@ export const Videoplayer: React.FC<Types.IEntity.Lesson> = ({ ...lessonData }) =
   return (
     <Container maxWidth="xl">
       <Drawer open={open} onClose={() => setOpen(false)}>
-        <Box sx={{ width: 200, paddingY: 10, paddingX: 1 }} role="presentation" onClick={() => setOpen(false)}>
+        <Box sx={{ width: 250, paddingY: 10, paddingX: 1 }} role="presentation" onClick={() => setOpen(false)}>
           <Typography>{lessonData.test} </Typography>
         </Box>
       </Drawer>

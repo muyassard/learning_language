@@ -6,12 +6,12 @@ import { Videoplayer } from './videoplayer';
 export const Home: React.FC = () => {
   const myLessons = session.get('lesson');
   console.log();
-
+  
   return (
     <Box height={100}>
       {myLessons ? (
         myLessons.map((lesson: IEntity.Lesson) => (
-          <div className="">
+          <div className="" key={lesson.title}>
             <Videoplayer test={lesson.test} language={lesson.language} title={lesson.title} url={lesson.url} />
           </div>
         ))
