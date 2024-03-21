@@ -2,11 +2,12 @@ import { useState } from 'react';
 
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { Button, Container, IconButton, InputAdornment, Stack, TextField, Typography } from '@mui/material';
+import { Alert, Button, Container, IconButton, InputAdornment, Stack, TextField, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { Login as loginType } from 'modules/auth/loginType';
 import { Link, useNavigate } from 'react-router-dom';
 import { session } from 'services/session';
+import CheckIcon from '@mui/icons-material/Check';
 
 export const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -21,7 +22,12 @@ export const Login: React.FC = () => {
 
   const onSubmit = (data: loginType) => {
     console.log(data);
-    session.get() === data ? navigate('/app/dashboard') : console.log('error');
+    
+    if (session.get('user') === data) {
+      navigate('app/dashboard');
+      <Alert severity="success">successfully logged in</Alert>;
+      console.log('welcome');
+    } else <Alert severity="error">you are not registered</Alert>;
   };
 
   return (

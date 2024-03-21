@@ -3,7 +3,7 @@ import { useState } from 'react';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
-import { Button, Container, IconButton, InputAdornment, Stack, TextField, Typography } from '@mui/material';
+import { Alert, Button, Container, IconButton, InputAdornment, Stack, TextField, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { Types } from 'modules/auth/';
@@ -21,9 +21,16 @@ export const Register: React.FC = () => {
   const { errors } = formState;
 
   const onSubmit = (data: Types.Login) => {
+    session.add('user', data);
     console.log(data);
-    session.add(data);
-    navigate('/app/dashboard');
+    <Alert variant="filled" severity="success">
+      welcome {session.get('user').name} ✋
+    </Alert>;
+
+    console.log('welcome');
+    setTimeout(() => {
+      navigate('/app/dashboard');
+    }, 1000);
   };
 
   return (

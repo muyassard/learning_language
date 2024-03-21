@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -6,22 +7,24 @@ import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
-import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
+import { Button } from '@mui/material';
 
+import { session } from 'services/session';
+import { English } from 'components/english';
+import { Home } from 'components';
+
+import { RiEnglishInput } from 'react-icons/ri';
 import HomeIcon from '@mui/icons-material/Home';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import { session } from 'services/session';
-import { Button, Stack } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
 
-const drawerWidth = 240;
+const drawerWidth = 150;
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
@@ -66,9 +69,7 @@ const AppBar = styled(MuiAppBar, {
   })
 }));
 
-const Drawer = styled(MuiDrawer, {
-  shouldForwardProp: prop => prop !== 'open'
-})(({ theme, open }) => ({
+const Drawer = styled(MuiDrawer, { shouldForwardProp: prop => prop !== 'open' })(({ theme, open }) => ({
   width: drawerWidth,
   flexShrink: 0,
   whiteSpace: 'nowrap',
@@ -88,11 +89,10 @@ const Dashboard: React.FC = () => {
 
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-  const [menuData, setmenuData] = useState('Home');
+  const [menuData, setmenuData] = useState('home');
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
+    <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed" open={open}>
         <Toolbar className="navbar">
           <IconButton
@@ -107,29 +107,28 @@ const Dashboard: React.FC = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Stack spacing={2}>
-            <Typography variant="h6" component="div">
-              {session.get().name}
-            </Typography>
-            <Button
-              onClick={() => {
-                session.remove();
-                navigate('/auth/register');
-              }}
-              color="inherit"
-              variant="text"
-            >
-              Logout
-            </Button>
-          </Stack>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            {session.get('user')[0].name}
+          </Typography>
+          <Button
+            onClick={() => {
+              session.remove();
+              navigate('/auth/register');
+            }}
+            color="inherit"
+            variant="text"
+          >
+            Logout
+          </Button>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <Typography display="flex" alignItems="center" justifyContent="flex-end" padding="11px">
           <IconButton onClick={() => setOpen(false)}>{theme.direction === 'rtl' ? '' : <ChevronLeftIcon />}</IconButton>
         </Typography>
+
         <List>
-          <ListItem>
+          <ListItem disablePadding onClick={() => setmenuData('home')}>
             <ListItemButton
               sx={{
                 minHeight: 48,
@@ -140,7 +139,8 @@ const Dashboard: React.FC = () => {
                 sx={{
                   minWidth: 0,
                   mr: open ? 3 : 'auto',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
+                  border: '50%'
                 }}
               >
                 <HomeIcon />
@@ -148,10 +148,31 @@ const Dashboard: React.FC = () => {
               <ListItemText primary="home" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
+          <ListItem disablePadding onClick={() => setmenuData('english')}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center'
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : 'auto',
+                  justifyContent: 'center',
+                  border: '50%'
+                }}
+              >
+                <RiEnglishInput />
+              </ListItemIcon>
+              <ListItemText primary="english" sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem>
         </List>
       </Drawer>
-      <Box display="flex" alignItems="center" component="main" sx={{ flexGrow: 1, p: 7 }}>
-        {menuData === 'Home' && <Typography>hello home</Typography>}
+      <Box component="main" sx={{ flexGrow: 1, p: 10 }}>
+        {menuData === 'home' && <Home />}
+        {menuData === 'english' && <English />}
       </Box>
     </Box>
   );

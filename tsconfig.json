@@ -18,5 +18,5 @@
     "rootDir": "src",
     "baseUrl": "src/"
   },
-  "include": ["src"]
+  "include": ["src", "src/assets/videos/lesson1.mp4"]
 }

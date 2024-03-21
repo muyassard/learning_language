@@ -7,8 +7,3 @@ export interface Login {
 }
 
 export interface User extends Login {}
-export interface IState {
-  user: null | User;
-  isFetched: boolean;
-  accessToken: string;
-}
