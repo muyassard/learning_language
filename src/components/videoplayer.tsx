@@ -10,7 +10,6 @@ import {
   Drawer,
   Typography
 } from '@mui/material';
-import { data } from 'data/myLessons';
 import { Types } from 'modules/dashboard';
 import { useState } from 'react';
 import ReactPlayer from 'react-player';
@@ -32,8 +31,6 @@ export const Videoplayer: React.FC<Types.IEntity.Lesson> = ({ ...lessonData }) =
   const onEnded = () => {
     setVideoStatus('end');
     session.add('lesson', lessonData);
-    data.push(lessonData);
-    console.log(data);
   };
 
   return (

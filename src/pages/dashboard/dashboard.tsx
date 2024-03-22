@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import { Button } from '@mui/material';
+import { Button, Tooltip } from '@mui/material';
 
 import { session } from 'services/session';
 import { English } from 'components/english';
@@ -142,7 +142,9 @@ const Dashboard: React.FC = () => {
                   border: '50%'
                 }}
               >
-                <HomeIcon />
+                <Tooltip title="home" placement="right">
+                  <HomeIcon />
+                </Tooltip>
               </ListItemIcon>
               <ListItemText primary="home" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -162,7 +164,9 @@ const Dashboard: React.FC = () => {
                   border: '50%'
                 }}
               >
-                <img width={25} src="/images/en.png" alt="" />
+                <Tooltip title="english" placement="right">
+                  <img width={25} src="/images/en.png" alt="" />
+                </Tooltip>
               </ListItemIcon>
               <ListItemText primary="english" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -182,9 +186,11 @@ const Dashboard: React.FC = () => {
                   border: '50%'
                 }}
               >
-                <img width={25} src="/images/ru.png" alt="russian" />
+                <Tooltip title="russian" placement="right">
+                  <img width={25} src="/images/ru.png" alt="russian" />
+                </Tooltip>
               </ListItemIcon>
-              <ListItemText primary="english" sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText primary="Russian" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
         </List>

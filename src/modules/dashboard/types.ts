@@ -1,3 +1,4 @@
+
 export namespace IEntity {
   export interface Lesson {
     url: string;
