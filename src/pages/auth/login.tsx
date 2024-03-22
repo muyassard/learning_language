@@ -25,11 +25,9 @@ export const Login: React.FC = () => {
     console.log(data);
 
     try {
-      const user = session.get('user').find((user: loginType) => user.email === data.email);
-
-      console.log(user.email === data.email);
-      console.log(user.email);
-      console.log(data.email);
+      const user = session
+        .get('user')
+        .find((user: loginType) => user.email === data.email && user.password === data.password);
 
       if (user !== -1) {
         message.success(`welcome ${user.name} ✋`);
