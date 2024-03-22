@@ -39,6 +39,11 @@ export const Login: React.FC = () => {
     }
   };
 
+  const goToRegister = () => {
+    Me.shift();
+    navigate('/auth/register');
+  };
+
   return (
     <Container maxWidth="xs">
       <Typography my={2} variant="h4">
@@ -48,23 +53,28 @@ export const Login: React.FC = () => {
       <form noValidate onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={2}>
           <TextField
-            label="enter email"
-            type="email"
-            {...register('email', { required: 'enter email' })}
+            label="Enter email"
+            {...register('email', {
+              required: 'Email is required',
+              pattern: { value: /\S+@\S+\.\S+/, message: 'Invalid email' }
+            })}
             error={!!errors.email}
-            helperText={errors.email?.message}
+            helperText={errors.email && errors.email.message}
           />
           <TextField
             type={eye ? 'text' : 'password'}
-            label="enter password"
-            {...register('password', { required: 'enter password' })}
+            label="Enter password"
+            {...register('password', {
+              required: 'Password is required',
+              minLength: { value: 3, message: 'Password must be at least 3 characters' }
+            })}
             error={!!errors.password}
-            helperText={errors.password?.message}
+            helperText={errors.password && errors.password.message}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton onClick={() => seteye(!eye)}>
-                    {eye ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                    {eye ? <VisibilityOffIcon /> : <VisibilityIcon />}
                   </IconButton>
                 </InputAdornment>
               )
@@ -75,9 +85,7 @@ export const Login: React.FC = () => {
           </Button>
         </Stack>
       </form>
-      <Button>
-        <Link to="/auth/register">Go to Register</Link>
-      </Button>
+      <Button onClick={() => goToRegister()}>Go to Register</Button>
     </Container>
   );
 };

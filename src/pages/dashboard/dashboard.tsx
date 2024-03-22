@@ -91,7 +91,6 @@ const Dashboard: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [menuData, setmenuData] = useState('home');
 
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed" open={open}>
@@ -114,6 +113,8 @@ const Dashboard: React.FC = () => {
             color="inherit"
             variant="text"
             onClick={() => {
+              Me.shift();
+
               session.removeAll();
               navigate('/auth/register');
             }}
@@ -124,7 +125,7 @@ const Dashboard: React.FC = () => {
           <Button
             onClick={() => {
               console.log('usersdash', session.get('user'));
-
+              Me.shift();
               navigate('/auth/login');
             }}
             color="inherit"

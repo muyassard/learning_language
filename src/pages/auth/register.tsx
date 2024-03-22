@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import * as yup from 'yup';
 
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -9,6 +10,13 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { Types } from 'modules/auth/';
 import { session } from 'services/session';
+import { Me } from 'data/me';
+
+const schema = yup.object().shape({
+  name: yup.string().required('Name is required'),
+  email: yup.string().email('Invalid email').required('Email is required'),
+  password: yup.string().required('Password is required').min(6, 'Password must be at least 6 characters')
+});
 
 export const Register: React.FC = () => {
   const navigate = useNavigate();
@@ -23,11 +31,13 @@ export const Register: React.FC = () => {
 
   const onSubmit = (data: Types.Login) => {
     session.add('user', data);
-    message.success(`welcome ${session.get('user')[0].name} ✋`);
+    message.success(`welcome ${data.name} ✋`);
     console.log('users', session.get('user'));
+    console.log(Me);
 
     setTimeout(() => {
-      navigate('/app/dashboard');
+      // navigate('/app/dashboard');
+      navigate('/auth/login');
     }, 1000);
   };
 
@@ -42,32 +52,34 @@ export const Register: React.FC = () => {
           <TextField
             label="enter name"
             type="name"
-            {...register('name', { required: 'enter name' })}
+            {...register('name', { required: 'enter name', minLength: { value: 3, message: 'minimum length 3' } })}
             error={!!errors.email}
             helperText={errors.name?.message}
           />
 
           <TextField
-            label="enter email"
-            type="email"
-            inputProps={{
-              type: 'email'
-            }}
-            {...register('email', { required: 'enter email' })}
+            label="Enter email"
+            {...register('email', {
+              required: 'Email is required',
+              pattern: { value: /\S+@\S+\.\S+/, message: 'Invalid email' }
+            })}
             error={!!errors.email}
-            helperText={errors.email?.message}
+            helperText={errors.email && errors.email.message}
           />
           <TextField
             type={eye ? 'text' : 'password'}
-            label="enter password"
-            {...register('password', { required: 'enter password' })}
+            label="Enter password"
+            {...register('password', {
+              required: 'Password is required',
+              minLength: { value: 3, message: 'Password must be at least 3 characters' }
+            })}
             error={!!errors.password}
-            helperText={errors.password?.message}
+            helperText={errors.password && errors.password.message}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton onClick={() => seteye(!eye)}>
-                    {eye ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                    {eye ? <VisibilityOffIcon /> : <VisibilityIcon />}
                   </IconButton>
                 </InputAdornment>
               )
