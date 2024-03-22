@@ -4,7 +4,8 @@ import { Auth, Dash } from 'pages';
 import { session } from 'services/session';
 
 const Routes: React.FC = () => {
-  const isAuthenticated = session.get('user');
+  const user = session.get('user');
+  const isAuthenticated = user ? user[0] : null;
 
   return (
     <Switch>

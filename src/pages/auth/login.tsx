@@ -3,11 +3,12 @@ import { message } from 'antd';
 
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { Alert, Button, Container, IconButton, InputAdornment, Stack, TextField, Typography } from '@mui/material';
+import { Button, Container, IconButton, InputAdornment, Stack, TextField, Typography } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { Login as loginType } from 'modules/auth/loginType';
 import { Link, useNavigate } from 'react-router-dom';
 import { session } from 'services/session';
+import { Me } from 'data/me';
 
 export const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -23,17 +24,21 @@ export const Login: React.FC = () => {
   const onSubmit = (data: loginType) => {
     console.log(data);
 
-    const user: loginType = session.get('user').find((user: loginType) => user.email === data.email);
+    try {
+      const user = session.get('user').find((user: loginType) => user.email === data.email);
 
-    console.log(user.email === data.email);
-    console.log(user.email);
-    console.log(data.email);
+      console.log(user.email === data.email);
+      console.log(user.email);
+      console.log(data.email);
 
-    if (user.email === data.email) {
-      message.success(`welcome ${user.name} ✋`);
-      console.log('welcome');
-      navigate('/app/dashboard');
-    } else message.error(`error`);
+      if (user !== -1) {
+        message.success(`welcome ${user.name} ✋`);
+        Me.push(user);
+        navigate('/app/dashboard');
+      }
+    } catch (err) {
+      message.error(`you are not registered `);
+    }
   };
 
   return (

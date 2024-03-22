@@ -24,11 +24,10 @@ export const Register: React.FC = () => {
   const onSubmit = (data: Types.Login) => {
     session.add('user', data);
     message.success(`welcome ${session.get('user')[0].name} ✋`);
-    console.log(session.get('user'));
+    console.log('users', session.get('user'));
 
     setTimeout(() => {
-      // navigate('/app/dashboard');
-      navigate('/auth/login');
+      navigate('/app/dashboard');
     }, 1000);
   };
 
@@ -51,6 +50,9 @@ export const Register: React.FC = () => {
           <TextField
             label="enter email"
             type="email"
+            inputProps={{
+              type: 'email'
+            }}
             {...register('email', { required: 'enter email' })}
             error={!!errors.email}
             helperText={errors.email?.message}

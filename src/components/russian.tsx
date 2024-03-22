@@ -7,7 +7,13 @@ export const Russian: React.FC = () => {
     <div>
       <Container maxWidth="xl" sx={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
         {russianData.map(lesson => (
-          <Videoplayer test={lesson.test} language={lesson.language} title={lesson.title} url={lesson.url} />
+          <Videoplayer
+            key={lesson.title}
+            test={lesson.test}
+            language={lesson.language}
+            title={lesson.title}
+            url={lesson.url}
+          />
         ))}
       </Container>
     </div>

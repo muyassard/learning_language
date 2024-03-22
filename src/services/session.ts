@@ -4,13 +4,16 @@ import store from 'store2';
 // User | IEntity.Lesson
 
 export const session = {
-  add: (key: string, data:any ) => {
+  add: (key: string, data: any) => {
     const storedData = store.get(key) || [];
     storedData.push(data);
     store.set(key, storedData);
   },
-  remove: () => {
+  removeAll: () => {
     store.clearAll();
+  },
+  remove: (user: string) => {
+    store.remove(user);
   },
   get: (key: string) => store.get(key)
 };

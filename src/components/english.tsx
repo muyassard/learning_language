@@ -1,10 +1,9 @@
-import { Container } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 import { Videoplayer } from './videoplayer';
 import { EnglishTest } from './englishTest';
 import { englishData } from 'data/myLessons';
 
 const url = 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4';
-
 
 export const English: React.FC = () => {
   return (
@@ -21,7 +20,13 @@ export const English: React.FC = () => {
         }}
       >
         {englishData.map(lesson => (
-          <Videoplayer test={<EnglishTest />} language={lesson.language} title={lesson.title} url={lesson.url} />
+          <Videoplayer
+            key={lesson.title}
+            test={<EnglishTest />}
+            language={lesson.language}
+            title={lesson.title}
+            url={lesson.url}
+          />
         ))}
       </Container>
     </div>

@@ -22,6 +22,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import { Me } from 'data/me';
 
 const drawerWidth = 150;
 
@@ -90,6 +91,7 @@ const Dashboard: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [menuData, setmenuData] = useState('home');
 
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed" open={open}>
@@ -106,13 +108,24 @@ const Dashboard: React.FC = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            {session.get('user')[0].name}
-          </Typography>
+          <Typography>{Me[0].name}</Typography>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}></Typography>
+          <Button
+            color="inherit"
+            variant="text"
+            onClick={() => {
+              session.removeAll();
+              navigate('/auth/register');
+            }}
+          >
+            Remove all
+          </Button>
+
           <Button
             onClick={() => {
-              session.remove();
-              navigate('/auth/register');
+              console.log('usersdash', session.get('user'));
+
+              navigate('/auth/login');
             }}
             color="inherit"
             variant="text"
