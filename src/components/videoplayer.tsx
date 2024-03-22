@@ -37,16 +37,16 @@ export const Videoplayer: React.FC<Types.IEntity.Lesson> = ({ ...lessonData }) =
   };
 
   return (
-    <Container maxWidth="xl">
+    <Container sx={{ display: 'contents' }}>
       <Drawer open={open} onClose={() => setOpen(false)}>
-        <Box sx={{ width: 250, paddingY: 10, paddingX: 1 }} role="presentation" onClick={() => setOpen(false)}>
+        <Box sx={{ width: 250, paddingY: 10, paddingX: 1 }} onClick={() => setOpen(false)}>
           <Typography>{lessonData.test} </Typography>
         </Box>
       </Drawer>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card sx={{ maxWidth: 300 }}>
         <CardActionArea>
           <ReactPlayer
-            width="400px"
+            width="300px"
             height="auto"
             url={lessonData.url}
             muted={true}

@@ -15,9 +15,8 @@ import { Button } from '@mui/material';
 
 import { session } from 'services/session';
 import { English } from 'components/english';
-import { Home } from 'components';
+import { Home, Russian } from 'components';
 
-import { RiEnglishInput } from 'react-icons/ri';
 import HomeIcon from '@mui/icons-material/Home';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import IconButton from '@mui/material/IconButton';
@@ -163,7 +162,27 @@ const Dashboard: React.FC = () => {
                   border: '50%'
                 }}
               >
-                <RiEnglishInput />
+                <img width={25} src="/images/en.png" alt="" />
+              </ListItemIcon>
+              <ListItemText primary="english" sx={{ opacity: open ? 1 : 0 }} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding onClick={() => setmenuData('russian')}>
+            <ListItemButton
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? 'initial' : 'center'
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : 'auto',
+                  justifyContent: 'center',
+                  border: '50%'
+                }}
+              >
+                <img width={25} src="/images/ru.png" alt="russian" />
               </ListItemIcon>
               <ListItemText primary="english" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
@@ -173,6 +192,7 @@ const Dashboard: React.FC = () => {
       <Box component="main" sx={{ flexGrow: 1, p: 10 }}>
         {menuData === 'home' && <Home />}
         {menuData === 'english' && <English />}
+        {menuData === 'russian' && <Russian />}
       </Box>
     </Box>
   );

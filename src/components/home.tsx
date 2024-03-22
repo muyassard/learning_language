@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import { IEntity } from 'modules/dashboard/types';
 import { session } from 'services/session';
 import { Videoplayer } from './videoplayer';
@@ -6,7 +6,7 @@ import { Videoplayer } from './videoplayer';
 export const Home: React.FC = () => {
   const myLessons = session.get('lesson');
   console.log();
-  
+
   return (
     <Box height={100}>
       {myLessons ? (
@@ -16,7 +16,9 @@ export const Home: React.FC = () => {
           </div>
         ))
       ) : (
-        <Typography> You have no tutorials viewed yet</Typography>
+        <Container maxWidth="xl" sx={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Typography variant="h5"> You have no tutorials viewed yet</Typography>
+        </Container>
       )}
     </Box>
   );
