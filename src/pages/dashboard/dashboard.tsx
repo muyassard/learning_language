@@ -136,7 +136,7 @@ const Dashboard: React.FC = () => {
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
-        <Typography display="flex" alignItems="center" justifyContent="flex-end" padding="11px">
+        <Typography display="flex" alignItems="center" justifyContent="flex-end" padding="20px">
           <IconButton onClick={() => setOpen(false)}>{theme.direction === 'rtl' ? '' : <ChevronLeftIcon />}</IconButton>
         </Typography>
 
