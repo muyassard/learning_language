@@ -124,7 +124,6 @@ const Dashboard: React.FC = () => {
 
           <Button
             onClick={() => {
-              console.log('usersdash', session.get('user'));
               Me.shift();
               navigate('/auth/login');
             }}

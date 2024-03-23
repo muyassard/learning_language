@@ -38,7 +38,6 @@ export const Register: React.FC = () => {
       } else {
         session.add('user', data);
         message.success(`welcome ${data.name} ✋`);
-        console.log('users', session.get('user'));
         console.log(Me);
 
         setTimeout(() => {
