@@ -6,4 +6,5 @@ export namespace IEntity {
     language: string;
     test: any;
   }
+  
 }

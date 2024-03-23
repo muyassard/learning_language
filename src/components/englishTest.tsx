@@ -8,7 +8,7 @@ interface CheckedItems {
   [key: string]: boolean;
 }
 
-export const EnglishTest:React.FC = () => {
+export const EnglishTest: React.FC = () => {
   const [checkedItems1, setCheckedItems1] = useState<CheckedItems>({
     ishonmoq: false,
     ishonch: false,

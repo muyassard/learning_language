@@ -1,6 +1,6 @@
 import { IEntity } from 'modules/dashboard/types';
 const enLanguage = 'english';
-const ruLanguage = 'english';
+const ruLanguage = 'russian';
 
 export const englishData: IEntity.Lesson[] = [
   {

@@ -11,6 +11,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Types } from 'modules/auth/';
 import { session } from 'services/session';
 import { Me } from 'data/me';
+import { Login, User } from 'modules/auth/loginType';
 
 const schema = yup.object().shape({
   name: yup.string().required('Name is required'),
@@ -30,17 +31,26 @@ export const Register: React.FC = () => {
   const { errors } = formState;
 
   const onSubmit = (data: Types.Login) => {
-    session.add('user', data);
-    message.success(`welcome ${data.name} ✋`);
-    console.log('users', session.get('user'));
-    console.log(Me);
+    try {
+      const user = session.get('user').find((user: Login) => user.email === data.email);
+      if (user) {
+        message.error(`you have already registered ${data.name} `);
+      } else {
+        session.add('user', data);
+        message.success(`welcome ${data.name} ✋`);
+        console.log('users', session.get('user'));
+        console.log(Me);
 
-    setTimeout(() => {
-      // navigate('/app/dashboard');
-      navigate('/auth/login');
-    }, 1000);
+        setTimeout(() => {
+          // navigate('/app/dashboard');
+          navigate('/auth/login');
+        }, 1000);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
-  
+
   return (
     <Container maxWidth="xs">
       <Typography my={2} variant="h4">
@@ -73,7 +83,7 @@ export const Register: React.FC = () => {
             label="Enter password"
             {...register('password', {
               required: 'Password is required',
-              minLength: { value: 3, message: 'Password must be at least 3 characters' }
+              minLength: { value: 4, message: 'Password must be at least 4 characters' }
             })}
             error={!!errors.password}
             helperText={errors.password && errors.password.message}
