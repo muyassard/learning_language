@@ -40,10 +40,10 @@ export const Videoplayer: React.FC<Types.IEntity.Lesson> = ({ ...lessonData }) =
           <Typography>{lessonData.test} </Typography>
         </Box>
       </Drawer>
-      <Card sx={{ maxWidth: 300 }}>
+      <Card sx={{ maxWidth: '90%' }}>
         <CardActionArea>
           <ReactPlayer
-            width="300px"
+            width="100%"
             height="auto"
             url={lessonData.url}
             muted={true}
@@ -67,7 +67,7 @@ export const Videoplayer: React.FC<Types.IEntity.Lesson> = ({ ...lessonData }) =
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button onClick={() => setOpen(true)}>Open drawer</Button>
+          <Button onClick={() => setOpen(true)}>Open Test</Button>
         </CardActions>
         <CardActions>
           {videoStatus === 'end' && <Chip label="video fully viewed" color="primary" variant="outlined" />}

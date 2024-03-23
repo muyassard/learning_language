@@ -19,7 +19,7 @@ const Routes: React.FC = () => {
         <Route path="register" element={<Auth.Register />} />
         <Route index path="*" element={<Navigate to="/auth/login" />} />
       </Route>
-
+      
       <Route index path="*" element={<Navigate to={isAuthenticated ? '/app/dashboard' : '/auth/login'} />} />
     </Switch>
   );

@@ -209,7 +209,7 @@ const Dashboard: React.FC = () => {
           </ListItem>
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 10 }}>
+      <Box component="main" sx={{ flexGrow: 1, paddingY: 10, paddingX: 6 }}>
         {menuData === 'home' && <Home />}
         {menuData === 'english' && <English />}
         {menuData === 'russian' && <Russian />}

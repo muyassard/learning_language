@@ -40,7 +40,7 @@ export const Register: React.FC = () => {
       navigate('/auth/login');
     }, 1000);
   };
-
+  
   return (
     <Container maxWidth="xs">
       <Typography my={2} variant="h4">
@@ -51,8 +51,10 @@ export const Register: React.FC = () => {
         <Stack spacing={2}>
           <TextField
             label="enter name"
-            type="name"
-            {...register('name', { required: 'enter name', minLength: { value: 3, message: 'minimum length 3' } })}
+            {...register('name', {
+              required: 'Name is required',
+              minLength: { value: 3, message: 'minimum length 3' }
+            })}
             error={!!errors.email}
             helperText={errors.name?.message}
           />
