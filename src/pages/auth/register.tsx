@@ -25,10 +25,22 @@ export const Register: React.FC = () => {
   const { errors } = formState;
 
   const onSubmit = (data: Types.Login) => {
+    const users = session.get('user');
     try {
-      const user = session.get('user').find((user: Login) => user.email === data.email);
-      if (user) {
-        message.error(`you have already registered ${data.name} `);
+      if (users) {
+        const user = users.find((user: Login) => user.email === data.email && user.password === data.password);
+        if (!user) {
+          session.add('user', data);
+          message.success(`welcome ${data.name} ✋`);
+          console.log(Me);
+
+          setTimeout(() => {
+            // navigate('/app/dashboard');
+            navigate('/auth/login');
+          }, 1000);
+        } else {
+          message.error(`you have already registered ${data.name} `);
+        }
       } else {
         session.add('user', data);
         message.success(`welcome ${data.name} ✋`);
