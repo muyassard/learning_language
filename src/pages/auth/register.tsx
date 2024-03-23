@@ -1,23 +1,17 @@
 import { useState } from 'react';
-import * as yup from 'yup';
+import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
+
+import { Login } from 'modules/auth/loginType';
+import { session } from 'services/session';
+import { Me } from 'data/me';
+import { Types } from 'modules/auth/';
 
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { message } from 'antd';
-
 import { Button, Container, IconButton, InputAdornment, Stack, TextField, Typography } from '@mui/material';
-import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
-import { Types } from 'modules/auth/';
-import { session } from 'services/session';
-import { Me } from 'data/me';
-import { Login, User } from 'modules/auth/loginType';
 
-const schema = yup.object().shape({
-  name: yup.string().required('Name is required'),
-  email: yup.string().email('Invalid email').required('Email is required'),
-  password: yup.string().required('Password is required').min(6, 'Password must be at least 6 characters')
-});
+import { message } from 'antd';
 
 export const Register: React.FC = () => {
   const navigate = useNavigate();
@@ -64,7 +58,7 @@ export const Register: React.FC = () => {
               required: 'Name is required',
               minLength: { value: 3, message: 'minimum length 3' }
             })}
-            error={!!errors.email}
+            error={!!errors.name}
             helperText={errors.name?.message}
           />
 
