@@ -27,7 +27,7 @@ export const Videoplayer: React.FC<Types.IEntity.Lesson> = ({ ...lessonData }) =
     const remainingMinutes = Math.floor(remainingSeconds / 60);
     setRemainingTime(remainingMinutes);
   };
-
+  
   const onEnded = () => {
     setVideoStatus('end');
     session.add('lesson', lessonData);

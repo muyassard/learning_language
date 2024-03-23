@@ -8,7 +8,7 @@ export const Home: React.FC = () => {
   console.log();
 
   return (
-    <Box height={100}>
+    <Container maxWidth="xl" sx={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
       {myLessons ? (
         myLessons.map((lesson: IEntity.Lesson) => (
           <div className="" key={lesson.title}>
@@ -20,6 +20,6 @@ export const Home: React.FC = () => {
           <Typography variant="h5"> You have no tutorials viewed yet</Typography>
         </Container>
       )}
-    </Box>
+    </Container>
   );
 };
