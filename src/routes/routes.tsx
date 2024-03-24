@@ -2,6 +2,7 @@ import React from 'react';
 import { Navigate, Route, Routes as Switch } from 'react-router-dom';
 import { Auth, Dash } from 'pages';
 import { session } from 'services/session';
+import { English, Russian } from 'components';
 
 const Routes: React.FC = () => {
   const user = session.get('user');
@@ -10,7 +11,9 @@ const Routes: React.FC = () => {
   return (
     <Switch>
       <Route path="app">
-        <Route path="dashboard" element={<Dash.Dashboard />} />
+        <Route path="dashboard" element={<Dash.Dashboard />}></Route>
+        <Route path="english" element={<English />}></Route>
+        <Route path="russian" element={<Russian />}></Route>
         <Route index path="*" element={<Navigate to="/app/dashboard" />} />
       </Route>
 
@@ -19,7 +22,7 @@ const Routes: React.FC = () => {
         <Route path="register" element={<Auth.Register />} />
         <Route index path="*" element={<Navigate to="/auth/login" />} />
       </Route>
-      
+
       <Route index path="*" element={<Navigate to={isAuthenticated ? '/app/dashboard' : '/auth/login'} />} />
     </Switch>
   );

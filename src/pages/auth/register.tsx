@@ -61,7 +61,6 @@ export const Register: React.FC = () => {
       <Typography my={2} variant="h4">
         Register
       </Typography>
-
       <form noValidate onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={2}>
           <TextField

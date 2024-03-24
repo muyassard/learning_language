@@ -1,4 +1,5 @@
 import {
+  Backdrop,
   Box,
   Button,
   Card,
@@ -8,6 +9,8 @@ import {
   Chip,
   Container,
   Drawer,
+  Fade,
+  Modal,
   Typography
 } from '@mui/material';
 import { Types } from 'modules/dashboard';
@@ -16,7 +19,12 @@ import ReactPlayer from 'react-player';
 import { session } from 'services/session';
 
 export const Videoplayer: React.FC<Types.IEntity.Lesson> = ({ ...lessonData }) => {
-  const [videoStatus, setVideoStatus] = useState('progress');
+  const localKey = lessonData.title + lessonData.language;
+  const states = session.get(localKey);
+  const state = states ? states[states.length - 1] : '';
+
+  const [videoStatus, setVideoStatus] = useState<string>(state || '');
+
   const [remainingTime, setRemainingTime] = useState<number | null>(null);
   const [videoDuration, setVideoDuration] = useState(0);
   const [open, setOpen] = useState(false);
@@ -28,19 +36,60 @@ export const Videoplayer: React.FC<Types.IEntity.Lesson> = ({ ...lessonData }) =
     setRemainingTime(remainingMinutes);
   };
 
+  const onPlay = () => {
+    setVideoStatus('progress');
+    session.add(localKey, 'progress');
+  };
+
   const onEnded = () => {
     setVideoStatus('end');
-    session.add('lesson', lessonData);
+    session.add(localKey, 'end');
+    session.add('lessons', lessonData);
+  };
+
+  const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'white',
+    borderRadius: '10px',
+    boxShadow: 24,
+    p: 4
   };
 
   return (
     <Container sx={{ display: 'contents' }}>
-      <Drawer open={open} onClose={() => setOpen(false)}>
-        <Box sx={{ width: 250, paddingY: 10, paddingX: 1 }} onClick={() => setOpen(false)}>
+      {/* <Drawer open={open} onClose={() => setOpen(false)}>
+        <Box sx={{ width: 250, paddingY: 2, paddingX: 1 }} onClick={() => setOpen(false)}>
           <Typography>{lessonData.test} </Typography>
         </Box>
-      </Drawer> 
-      <Card sx={{ maxWidth: '90%' }}>
+      </Drawer> */}
+
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        open={open}
+        onClose={() => setOpen(false)}
+        // closeAfterTransition
+        slots={{ backdrop: Backdrop }}
+        // slotProps={{
+        //   backdrop: {
+        //     timeout: 500
+        //   }
+        // }}
+      >
+        <Fade in={open}>
+          <Box sx={style}>{lessonData.test}</Box>
+        </Fade>
+      </Modal>
+
+      <Card
+        sx={{
+          maxWidth: '85%'
+        }}
+      >
         <CardActionArea>
           <ReactPlayer
             width="100%"
@@ -53,16 +102,17 @@ export const Videoplayer: React.FC<Types.IEntity.Lesson> = ({ ...lessonData }) =
               setVideoDuration(state);
             }}
             onEnded={onEnded}
+            onPlay={onPlay}
           />
           <CardContent>
             <Typography gutterBottom variant="h6" component="div">
-              {remainingTime !== null && <p>Remaining time: {remainingTime} minutes</p>}
-            </Typography>
-            <Typography gutterBottom variant="h6" component="div">
               {lessonData.title}
             </Typography>
+            <Typography gutterBottom component="div">
+              {remainingTime !== null && <p>Remaining time: {remainingTime} minutes</p>}
+            </Typography>
             <Typography variant="body2" color="text.secondary">
-              Try this test to strengthen your knowledge 👇
+              {lessonData.description}{' '}
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -70,7 +120,13 @@ export const Videoplayer: React.FC<Types.IEntity.Lesson> = ({ ...lessonData }) =
           <Button onClick={() => setOpen(true)}>Open Test</Button>
         </CardActions>
         <CardActions>
-          {videoStatus === 'end' && <Chip label="video fully viewed" color="primary" variant="outlined" />}
+          {videoStatus === 'end' ? (
+            <Chip label="video fully viewed" color="primary" variant="outlined" />
+          ) : videoStatus === 'progress' ? (
+            <Chip label="video in progress" color="success" variant="outlined" />
+          ) : (
+            ''
+          )}
         </CardActions>
       </Card>
     </Container>

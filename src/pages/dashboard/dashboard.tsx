@@ -23,6 +23,7 @@ import { session } from 'services/session';
 import { English } from 'components/english';
 import { Home, Russian } from 'components';
 import { Me } from 'data/me';
+import Languages from 'components/languages';
 
 const drawerWidth = 150;
 
@@ -83,13 +84,13 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: prop => prop !== 'open' })
     '& .MuiDrawer-paper': closedMixin(theme)
   })
 }));
- 
+
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
 
   const theme = useTheme();
   const [open, setOpen] = useState(false);
-  const [menuData, setmenuData] = useState('home');
+  const [menuData, setmenuData] = useState('languages');
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -162,7 +163,7 @@ const Dashboard: React.FC = () => {
               <ListItemText primary="home" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding onClick={() => setmenuData('english')}>
+          <ListItem disablePadding onClick={() => setmenuData('languages')}>
             <ListItemButton
               sx={{
                 minHeight: 48,
@@ -177,41 +178,18 @@ const Dashboard: React.FC = () => {
                   border: '50%'
                 }}
               >
-                <Tooltip title="english" placement="right">
-                  <img width={25} src="/images/en.png" alt="" />
+                <Tooltip title="Languages" placement="right">
+                  <img width={25} src="/images/languages.png" alt="languages" />
                 </Tooltip>
               </ListItemIcon>
-              <ListItemText primary="english" sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding onClick={() => setmenuData('russian')}>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? 'initial' : 'center'
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : 'auto',
-                  justifyContent: 'center',
-                  border: '50%'
-                }}
-              >
-                <Tooltip title="russian" placement="right">
-                  <img width={25} src="/images/ru.png" alt="russian" />
-                </Tooltip>
-              </ListItemIcon>
-              <ListItemText primary="Russian" sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText primary="Languages" sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, paddingY: 10, paddingX: 6 }}>
+      <Box component="main" sx={{ flexGrow: 1, paddingLeft: 7, paddingBlockStart: 3, height: '96.5vh' }}>
         {menuData === 'home' && <Home />}
-        {menuData === 'english' && <English />}
-        {menuData === 'russian' && <Russian />}
+        {menuData === 'languages' && <Languages />}
       </Box>
     </Box>
   );
