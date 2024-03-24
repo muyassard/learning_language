@@ -44,7 +44,7 @@ export const Videoplayer: React.FC<Types.IEntity.Lesson> = ({ ...lessonData }) =
   const onEnded = () => {
     setVideoStatus('end');
     session.add(localKey, 'end');
-    session.add('lessons', lessonData);
+    // session.add('lessons', lessonData);
   };
 
   const style = {
