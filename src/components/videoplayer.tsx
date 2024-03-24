@@ -61,7 +61,7 @@ export const Videoplayer: React.FC<Types.IEntity.Lesson> = ({ ...lessonData }) =
 
   return (
     <Container sx={{ display: 'contents' }}>
-      <Modal
+      {/* <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={open}
@@ -71,7 +71,7 @@ export const Videoplayer: React.FC<Types.IEntity.Lesson> = ({ ...lessonData }) =
         <Fade in={open}>
           <Box sx={style}>{lessonData.test}</Box>
         </Fade>
-      </Modal>
+      </Modal> */}
 
       <Card
         sx={{
