@@ -61,24 +61,12 @@ export const Videoplayer: React.FC<Types.IEntity.Lesson> = ({ ...lessonData }) =
 
   return (
     <Container sx={{ display: 'contents' }}>
-      {/* <Drawer open={open} onClose={() => setOpen(false)}>
-        <Box sx={{ width: 250, paddingY: 2, paddingX: 1 }} onClick={() => setOpen(false)}>
-          <Typography>{lessonData.test} </Typography>
-        </Box>
-      </Drawer> */}
-
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={open}
         onClose={() => setOpen(false)}
-        // closeAfterTransition
         slots={{ backdrop: Backdrop }}
-        // slotProps={{
-        //   backdrop: {
-        //     timeout: 500
-        //   }
-        // }}
       >
         <Fade in={open}>
           <Box sx={style}>{lessonData.test}</Box>

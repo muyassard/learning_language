@@ -1,26 +1,49 @@
-import { Container, Typography } from '@mui/material';
+import { Container, Grid, Stack, Typography } from '@mui/material';
 import { IEntity } from 'modules/dashboard/types';
 import { session } from 'services/session';
 import { Videoplayer } from './videoplayer';
 
 export const Home: React.FC = () => {
-  const myLessons = session.get('lesson');
-  console.log(myLessons);
+  const myLessons = session.get('lessons');
 
   return (
-    <Container maxWidth="xl" sx={{ display: 'flex', gap: '10px', flexWrap: 'wrap', paddingBlockStart: '60px' }}>
+    <Stack
+      paddingX={{ xs: 2, sm: 3, md: 4 }}
+      paddingY={5}
+      boxSizing="border-box"
+      width="100%"
+      height="100vh"
+      spacing={2}
+      alignItems="start"
+      sx={{ overflowX: 'hidden', background: 'linear-gradient(to right bottom, #EBF5FF, #B3F0F0)' }}
+    >
       {myLessons ? (
-        myLessons.map((lesson: IEntity.Lesson) => (
-          <div key={lesson.title}>
-            <Videoplayer
-              description={lesson.description}
-              test={lesson.test}
-              language={lesson.language}
-              title={lesson.title}
-              url={lesson.url}
-            />
-          </div>
-        ))
+        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 12, md: 12, lg: 12 }}>
+          {myLessons.map((lesson: IEntity.Lesson) => (
+            <Grid
+              sx={{
+                transition: 'transform 0.2s ease-in-out',
+                '&:hover': {
+                  transform: 'scale(1.05)'
+                }
+              }}
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              key={lesson.url}
+            >
+              <Videoplayer
+                key={lesson.title}
+                test={lesson.test}
+                language={lesson.language}
+                title={lesson.title}
+                description={lesson.description}
+                url={lesson.url}
+              />
+            </Grid>
+          ))}
+        </Grid>
       ) : (
         <Container
           maxWidth="xl"
@@ -53,6 +76,6 @@ export const Home: React.FC = () => {
           />
         </Container>
       )}
-    </Container>
+    </Stack>
   );
 };
