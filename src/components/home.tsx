@@ -7,14 +7,7 @@ export const Home: React.FC = () => {
   const myLessons = session.get('lessons');
 
   return (
-    <Stack
-      boxSizing="border-box"
-      width="100%"
-      height="100vh"
-      spacing={2}
-      alignItems="start"
-      sx={{ overflowX: 'hidden' }}
-    >
+    <Stack width="100%" height="100%" spacing={2} alignItems="start" sx={{ overflowX: 'hidden', marginTop:'100px' }}>
       {myLessons ? (
         <Grid
           paddingInlineStart={2}
@@ -62,8 +55,7 @@ export const Home: React.FC = () => {
             display: 'flex',
             flexDirection: { xs: 'column', md: 'row' },
             alignItems: 'center',
-            justifyContent: 'space-around',
-            textAlign: 'center'
+            justifyContent: 'space-around'
           }}
         >
           <Typography
@@ -71,7 +63,7 @@ export const Home: React.FC = () => {
             sx={{
               marginBottom: { xs: 2, md: 0 },
               fontSize: {
-                xs: '1rem', // Adjust the smallest font size here
+                xs: '1rem',
                 sm: '1.5rem',
                 md: '2rem',
                 lg: '2rem'
@@ -80,11 +72,7 @@ export const Home: React.FC = () => {
           >
             You can learn many languages. <br /> learn languages ​​easily with uss
           </Typography>
-          <img
-            style={{ maxWidth: '100%', height: 'auto', width: '500px' }} // Add margin bottom for small screens
-            src="/images/lan2.jpg"
-            alt="languages"
-          />
+          <img style={{ maxWidth: '100%', height: 'auto', width: '500px' }} src="/images/lan2.jpg" alt="languages" />
         </Container>
       )}
     </Stack>

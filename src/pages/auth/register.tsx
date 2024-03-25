@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -9,7 +9,10 @@ import { Types } from 'modules/auth/';
 
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { Button, Container, IconButton, InputAdornment, Stack, TextField, Typography } from '@mui/material';
+import { Button, Container, Grid, IconButton, InputAdornment, Stack, TextField, Typography } from '@mui/material';
+
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 import { message } from 'antd';
 
@@ -20,6 +23,14 @@ export const Register: React.FC = () => {
   const form = useForm<Types.Login>({
     defaultValues: { email: '', password: '', name: '' }
   });
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true
+    });
+    AOS.refresh();
+  }, []);
 
   const { register, handleSubmit, formState } = form;
   const { errors } = formState;
@@ -57,16 +68,17 @@ export const Register: React.FC = () => {
   };
 
   return (
-    <Typography
+    <Grid
+      alignContent="center"
       sx={{
-        height: '97vh',
+        height: '100vh',
         width: '100%',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundImage: `url(/images/bgauth.jpg)`
       }}
     >
-      <Container maxWidth="xs">
+      <Container data-aos="zoom-in" maxWidth="xs">
         <Typography my={2} variant="h4">
           Register
         </Typography>
@@ -119,7 +131,7 @@ export const Register: React.FC = () => {
           <Link to="/auth/login">Go to Login</Link>
         </Button>
       </Container>
-    </Typography>
+    </Grid>
   );
 };
 

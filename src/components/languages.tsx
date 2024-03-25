@@ -1,16 +1,16 @@
-import { Container, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import { languageData } from 'data/myLessons';
 import React from 'react';
 import LanguageCard from './languageCard';
 
 const Languages: React.FC = () => {
   return (
-    <Container
-      className="lan"
+    <Grid
       sx={{
         display: 'flex',
-        margin: '0px',
+        paddingLeft: '25px',
         flexWrap: 'wrap',
+        margin: '0',
         height: '100vh',
         background: 'linear-gradient(to right bottom, #EBF5FF, #B3F0F0)'
       }}
@@ -27,7 +27,7 @@ const Languages: React.FC = () => {
           </Grid>
         ))}
       </Grid>
-    </Container>
+    </Grid>
   );
 };
 

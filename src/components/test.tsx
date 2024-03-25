@@ -44,7 +44,7 @@ export const LanguageTest: React.FC = () => {
   const selectAnswer = (answer: string) => {
     if (answer === currentQuestion?.correct_answer) {
       setCountCorrectAnswers(prevState => [...prevState, true]);
-      
+
       achiveSound();
     }
     setTimeout(() => {

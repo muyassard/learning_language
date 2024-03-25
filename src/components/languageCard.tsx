@@ -1,13 +1,23 @@
-import { Avatar, Card, CardContent, Stack, Tooltip, Typography } from '@mui/material';
+import { Avatar, Card, CardContent, Stack, Typography } from '@mui/material';
 import { IEntity } from 'modules/dashboard/types';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const LanguageCard: React.FC<IEntity.LanguageCard> = ({ ...language }) => {
   const navigate = useNavigate();
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true
+    });
+    AOS.refresh();
+  }, []);
 
   return (
     <Card
+      data-aos="flip-left"
       onClick={() => navigate(language.navigate)}
       sx={{ maxWidth: 350, padding: 1, marginTop: '20px', cursor: 'pointer' }}
     >

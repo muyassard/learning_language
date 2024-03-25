@@ -24,7 +24,7 @@ import { Home } from 'components';
 import { Me } from 'data/me';
 import Languages from 'components/languages';
 
-const drawerWidth = 150;
+const drawerWidth = 160;
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
@@ -107,7 +107,18 @@ const Dashboard: React.FC = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography>{Me[0].name}</Typography>
+          <Typography
+            sx={{
+              fontSize: {
+                xs: '14px',
+                sm: '14px',
+                md: '16px',
+                lg: '18px'
+              }
+            }}
+          >
+            {Me[0].name}
+          </Typography>
           <Typography sx={{ flexGrow: 1 }}></Typography>
           <Typography paddingLeft={8}>
             <Button
