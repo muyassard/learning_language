@@ -57,59 +57,69 @@ export const Register: React.FC = () => {
   };
 
   return (
-    <Container maxWidth="xs">
-      <Typography my={2} variant="h4">
-        Register
-      </Typography>
-      <form noValidate onSubmit={handleSubmit(onSubmit)}>
-        <Stack spacing={2}>
-          <TextField
-            label="enter name"
-            {...register('name', {
-              required: 'Name is required',
-              minLength: { value: 3, message: 'minimum length 3' }
-            })}
-            error={!!errors.name}
-            helperText={errors.name?.message}
-          />
+    <Typography
+      sx={{
+        height: '97vh',
+        width: '100%',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundImage: `url(/images/bgauth.jpg)`
+      }}
+    >
+      <Container maxWidth="xs">
+        <Typography my={2} variant="h4">
+          Register
+        </Typography>
+        <form noValidate onSubmit={handleSubmit(onSubmit)}>
+          <Stack spacing={2}>
+            <TextField
+              label="enter name"
+              {...register('name', {
+                required: 'Name is required',
+                minLength: { value: 3, message: 'minimum length 3' }
+              })}
+              error={!!errors.name}
+              helperText={errors.name?.message}
+            />
 
-          <TextField
-            label="Enter email"
-            {...register('email', {
-              required: 'Email is required',
-              pattern: { value: /\S+@\S+\.\S+/, message: 'Invalid email' }
-            })}
-            error={!!errors.email}
-            helperText={errors.email && errors.email.message}
-          />
-          <TextField
-            type={eye ? 'text' : 'password'}
-            label="Enter password"
-            {...register('password', {
-              required: 'Password is required',
-              minLength: { value: 4, message: 'Password must be at least 4 characters' }
-            })}
-            error={!!errors.password}
-            helperText={errors.password && errors.password.message}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={() => seteye(!eye)}>
-                    {eye ? <VisibilityOffIcon /> : <VisibilityIcon />}
-                  </IconButton>
-                </InputAdornment>
-              )
-            }}
-          />
-          <Button onSubmit={handleSubmit(onSubmit)} type="submit" variant="contained">
-            Register
-          </Button>
-        </Stack>
-      </form>
-      <Button>
-        <Link to="/auth/login">Go to Login</Link>
-      </Button>
-    </Container>
+            <TextField
+              label="Enter email"
+              {...register('email', {
+                required: 'Email is required',
+                pattern: { value: /\S+@\S+\.\S+/, message: 'Invalid email' }
+              })}
+              error={!!errors.email}
+              helperText={errors.email && errors.email.message}
+            />
+            <TextField
+              type={eye ? 'text' : 'password'}
+              label="Enter password"
+              {...register('password', {
+                required: 'Password is required',
+                minLength: { value: 4, message: 'Password must be at least 4 characters' }
+              })}
+              error={!!errors.password}
+              helperText={errors.password && errors.password.message}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={() => seteye(!eye)}>
+                      {eye ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                    </IconButton>
+                  </InputAdornment>
+                )
+              }}
+            />
+            <Button onSubmit={handleSubmit(onSubmit)} type="submit" variant="contained">
+              Register
+            </Button>
+          </Stack>
+        </form>
+        <Button>
+          <Link to="/auth/login">Go to Login</Link>
+        </Button>
+      </Container>
+    </Typography>
   );
 };
 

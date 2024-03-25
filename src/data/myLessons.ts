@@ -61,11 +61,5 @@ export const languageData: IEntity.LanguageCard[] = [
     description: 'Если вы заинтересованы в изучении нового языка, это приложение поможет вам    быстро освоить его .',
     lan: 'Russia',
     navigate: '/app/russian'
-  },
-  {
-    imgUrl: '/images/russia.png',
-    description: 'Если вы заинтересованы в изучении нового языка, это приложение поможет вам быстро освоить его .',
-    lan: 'Russia',
-    navigate: '/app/russian'
   }
 ];

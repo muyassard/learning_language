@@ -20,8 +20,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 import { session } from 'services/session';
-import { English } from 'components/english';
-import { Home, Russian } from 'components';
+import { Home } from 'components';
 import { Me } from 'data/me';
 import Languages from 'components/languages';
 
@@ -95,7 +94,7 @@ const Dashboard: React.FC = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed" open={open}>
-        <Toolbar className="navbar">
+        <Toolbar sx={{ display: 'flex', flexWrap: 'wrap' }} className="navbar">
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -109,30 +108,47 @@ const Dashboard: React.FC = () => {
             <MenuIcon />
           </IconButton>
           <Typography>{Me[0].name}</Typography>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}></Typography>
-          <Button
-            color="inherit"
-            variant="text"
-            onClick={() => {
-              Me.shift();
+          <Typography sx={{ flexGrow: 1 }}></Typography>
+          <Typography paddingLeft={8}>
+            <Button
+              onClick={() => {
+                Me.shift();
+                navigate('/auth/login');
+              }}
+              color="inherit"
+              variant="text"
+              sx={{
+                fontSize: {
+                  xs: '10px',
+                  sm: '12px',
+                  md: '14px',
+                  lg: '16px'
+                }
+              }}
+            >
+              Logout
+            </Button>
+            <Button
+              color="inherit"
+              variant="text"
+              sx={{
+                fontSize: {
+                  xs: '10px',
+                  sm: '12px',
+                  md: '14px',
+                  lg: '16px'
+                }
+              }}
+              onClick={() => {
+                Me.shift();
 
-              session.removeAll();
-              navigate('/auth/register');
-            }}
-          >
-            Remove all
-          </Button>
-
-          <Button
-            onClick={() => {
-              Me.shift();
-              navigate('/auth/login');
-            }}
-            color="inherit"
-            variant="text"
-          >
-            Logout
-          </Button>
+                session.removeAll();
+                navigate('/auth/register');
+              }}
+            >
+              Remove all
+            </Button>
+          </Typography>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -187,7 +203,7 @@ const Dashboard: React.FC = () => {
           </ListItem>
         </List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, paddingLeft: 7, paddingBlockStart: 3, height: '96.5vh' }}>
+      <Box sx={{ flexGrow: 1, paddingLeft: 7, alignItems: 'center', height: '96.5vh' }}>
         {menuData === 'home' && <Home />}
         {menuData === 'languages' && <Languages />}
       </Box>

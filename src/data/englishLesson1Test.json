@@ -1,0 +1,45 @@
+{
+  "response_code": 0,
+  "results": [
+    {
+      "type": "multiple",
+      "difficulty": "easy",
+      "category": "Entertainment: Books",
+      "question": "What is Sherlock Holmes' brother's name? ",
+      "correct_answer": "Mycroft Holmes",
+      "incorrect_answers": ["Mederi Holmes", "Martin Holmes", "Herbie Hancock Holmes"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "easy",
+      "category": "Entertainment: Books",
+      "question": "Who wrote &quot;A Tale of Two Cities&quot;?",
+      "correct_answer": "Charles Dickens",
+      "incorrect_answers": ["Charles Darwin", "Mark Twain", "Roald Dahl"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "easy",
+      "category": "Entertainment: Books",
+      "question": "George Orwell wrote this book, which is often considered a statement on government oversight.",
+      "correct_answer": "1984",
+      "incorrect_answers": ["The Old Man and the Sea", "Catcher and the Rye", "To Kill a Mockingbird"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "easy",
+      "category": "Entertainment: Books",
+      "question": "What is the name of the three-headed dog in Harry Potter and the Sorcerer's Stone?",
+      "correct_answer": "Fluffy",
+      "incorrect_answers": ["Spike", "Poofy", "Spot"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "easy",
+      "category": "Entertainment: Books",
+      "question": "Which of the following is the best selling book in the world?",
+      "correct_answer": "The Lord of the Rings",
+      "incorrect_answers": ["The Little Prince", "Harry Potter and the Philosopher's Stone", "The Da Vinci Code"]
+    }
+  ]
+}

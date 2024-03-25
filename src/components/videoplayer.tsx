@@ -1,5 +1,4 @@
 import {
-  Backdrop,
   Box,
   Button,
   Card,
@@ -8,7 +7,6 @@ import {
   CardContent,
   Chip,
   Container,
-  Drawer,
   Fade,
   Modal,
   Typography
@@ -28,6 +26,7 @@ export const Videoplayer: React.FC<Types.IEntity.Lesson> = ({ ...lessonData }) =
   const [remainingTime, setRemainingTime] = useState<number | null>(null);
   const [videoDuration, setVideoDuration] = useState(0);
   const [open, setOpen] = useState(false);
+  const [isPlaying, setisPlaying] = useState(false);
 
   const handleProgress = (state: { playedSeconds: number }) => {
     const { playedSeconds } = state;
@@ -44,7 +43,7 @@ export const Videoplayer: React.FC<Types.IEntity.Lesson> = ({ ...lessonData }) =
   const onEnded = () => {
     setVideoStatus('end');
     session.add(localKey, 'end');
-    // session.add('lessons', lessonData);
+    session.add('lessons', lessonData);
   };
 
   const style = {
@@ -52,34 +51,36 @@ export const Videoplayer: React.FC<Types.IEntity.Lesson> = ({ ...lessonData }) =
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
     bgcolor: 'white',
     borderRadius: '10px',
     boxShadow: 24,
-    p: 4
+    p: 2,
+    width: '90vw',
+    maxWidth: '400px',
+    maxHeight: '90vh'
   };
 
   return (
     <Container sx={{ display: 'contents' }}>
-      {/* <Modal
+      <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         open={open}
         onClose={() => setOpen(false)}
-        slots={{ backdrop: Backdrop }}
       >
         <Fade in={open}>
           <Box sx={style}>{lessonData.test}</Box>
         </Fade>
-      </Modal> */}
+      </Modal>
 
       <Card
         sx={{
           maxWidth: '85%'
         }}
       >
-        <CardActionArea>
+        <CardActionArea onClick={() => setisPlaying(true)}>
           <ReactPlayer
+            playing={isPlaying}
             width="100%"
             height="auto"
             url={lessonData.url}

@@ -8,17 +8,28 @@ export const Home: React.FC = () => {
 
   return (
     <Stack
-      paddingX={{ xs: 2, sm: 3, md: 4 }}
-      paddingY={5}
       boxSizing="border-box"
       width="100%"
       height="100vh"
       spacing={2}
       alignItems="start"
-      sx={{ overflowX: 'hidden', background: 'linear-gradient(to right bottom, #EBF5FF, #B3F0F0)' }}
+      sx={{ overflowX: 'hidden' }}
     >
       {myLessons ? (
-        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 12, md: 12, lg: 12 }}>
+        <Grid
+          paddingInlineStart={2}
+          container
+          paddingX={{ xs: 2, sm: 3, md: 4 }}
+          sx={{
+            height: '97vh',
+            width: '100%',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            backgroundImage: `url(/images/bgauth.jpg)`
+          }}
+          spacing={{ xs: 2, md: 3 }}
+          columns={{ xs: 4, sm: 12, md: 12, lg: 12 }}
+        >
           {myLessons.map((lesson: IEntity.Lesson) => (
             <Grid
               sx={{
