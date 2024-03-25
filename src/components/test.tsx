@@ -102,13 +102,14 @@ export const LanguageTest: React.FC = () => {
                         bgcolor: '#6DB3F2'
                       },
                       fontSize: { xs: '10px', sm: '12px', md: '12px', lg: '14px' },
-                      justifyContent: 'space-between'
+                      textAlign: 'center',
+                      width: '100%'
                     }}
                     fullWidth
                     variant="contained"
                     onClick={() => selectAnswer(ans)}
                   >
-                    <Typography>{idx + 1}.</Typography>
+                    <Typography sx={{ position: 'absolute', left: '10px' }}>{idx + 1}.</Typography>
                     {ans}
                   </Button>
                 </Grid>
