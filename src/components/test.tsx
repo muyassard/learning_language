@@ -101,7 +101,7 @@ export const LanguageTest: React.FC = () => {
                       '&:hover': {
                         bgcolor: '#6DB3F2'
                       },
-                      fontSize: { xs: '10px', sm: '12px', md: '14px', lg: '16px' }
+                      fontSize: { xs: '10px', sm: '12px', md: '12px', lg: '14px' }
                     }}
                     fullWidth
                     variant="contained"
