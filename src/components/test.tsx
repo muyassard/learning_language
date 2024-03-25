@@ -101,13 +101,15 @@ export const LanguageTest: React.FC = () => {
                       '&:hover': {
                         bgcolor: '#6DB3F2'
                       },
-                      fontSize: { xs: '10px', sm: '12px', md: '12px', lg: '14px' }
+                      fontSize: { xs: '10px', sm: '12px', md: '12px', lg: '14px' },
+                      justifyContent: 'space-between'
                     }}
                     fullWidth
                     variant="contained"
                     onClick={() => selectAnswer(ans)}
                   >
-                    {idx + 1}. {ans}
+                    <Typography>{idx + 1}.</Typography>
+                    {ans}
                   </Button>
                 </Grid>
               ))}
